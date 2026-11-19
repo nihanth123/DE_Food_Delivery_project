@@ -162,8 +162,6 @@ docker compose build
 docker compose up -d
 ```
 
-Open http://localhost:8080 and trigger `doordash_batch`. Change the default `admin` / `admin` login and the JWT secret in `docker-compose.yaml` for anything beyond local use.
-
 ### 6. Run the Streamlit apps
 
 ```bash
@@ -171,10 +169,3 @@ cd airflow/ai
 streamlit run rag_chat.py
 streamlit run text_to_sql.py
 ```
-
-## Known gaps
-
-- `dbt_build_ai` selects `tag:ai`, but no model carries that tag yet, so the task does nothing.
-- `text_to_sql.py` describes tables and schemas (`MARTS`, `FCT_ORDERS`, `MART_DELIVERY_SLA`, `ZOMATO` database) that do not match the current `MART` models. Update its `SCHEMA` prompt and connection settings.
-- `docker-compose.yaml` builds the Snowflake connection against `ZOMATO` / `ZOMATO_WH`, while the DAG and dbt use `DOORDASH` / `DE_PROJECT`.
-- `main.py` is a placeholder.
