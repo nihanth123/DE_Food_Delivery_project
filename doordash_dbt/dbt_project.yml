@@ -1,0 +1,27 @@
+name: 'doordash_dbt'
+version: '1.0.0'
+
+profile: 'doordash_dbt'
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  doordash_dbt:
+    staging:
+      +materialized: view
+      +schema: staging
+    mart:
+      +materialized: table
+      +schema: mart
+
+snapshots:
+  doordash_dbt:
+    +schema: snapshots
